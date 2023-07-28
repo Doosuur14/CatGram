@@ -20,7 +20,7 @@ struct ContentView: View {
         NavigationView{
             VStack{
                 Text(EmojiSelection.rawValue)
-                    .font(.system(size: 150))
+                    .font(.system(size: 200))
                 
                 
                 Picker("Select Emoji", selection: $EmojiSelection){
