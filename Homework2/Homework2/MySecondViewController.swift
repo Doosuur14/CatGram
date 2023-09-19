@@ -19,6 +19,7 @@ class MySecondViewController: UIViewController {
         mySecondImageview.layer.cornerRadius = mySecondImageview.frame.height/2
         mySecondImageview.layer.masksToBounds = true
         self.view.backgroundColor = .systemGray4
+        self.navigationItem.hidesBackButton = true
     }
     
     @IBAction func exitButtonTapped(_ sender: Any) {
