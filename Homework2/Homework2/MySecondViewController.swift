@@ -18,7 +18,7 @@ class MySecondViewController: UIViewController {
     func viewDidAppear() {
         mySecondImageview.layer.cornerRadius = mySecondImageview.frame.height/2
         mySecondImageview.layer.masksToBounds = true
-        self.view.backgroundColor = .systemIndigo
+        self.view.backgroundColor = .systemGray4
     }
     
     @IBAction func exitButtonTapped(_ sender: Any) {

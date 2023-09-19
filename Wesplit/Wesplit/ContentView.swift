@@ -43,15 +43,26 @@ struct ContentView: View {
         }
         
         
+       
+        
+      
+            
+        
         
         //to fill in the total amount
         NavigationView{
             Form{
                 Section{
-                    TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ??  "USD"))
-                        .keyboardType(.decimalPad)
-                        .focused($amountIsFocused)
                     
+                    if tipPercentage > 0{
+                        TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ??  "USD"))
+                            .keyboardType(.decimalPad)
+                            .focused($amountIsFocused)
+                    }else {
+                        TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ??  "USD"))
+                            .modifier(titleViewEdit())
+                    }
+                                        
                     
                     Picker("Number of people" , selection: $numberOfPeople){
                         ForEach(2..<100){
@@ -63,14 +74,17 @@ struct ContentView: View {
                 
                 //section to choose percentage
                 Section{
+                    TextField( "Tip percentage", value: $tipPercentage , format:.percent)
+                            .keyboardType(.numberPad)
                     
-                    Picker("Tip Percentage" , selection: $tipPercentage){
-                        //ForEach(tipPercentages , id: \.self){
-                        ForEach(0..<101){ //Added this to expand the percentage options.
-                            Text($0, format: .percent)
-                        }
-                    }
-                        //.pickerStyle(.segmented)
+                    
+//                    Picker("Tip Percentage" , selection: $tipPercentage){
+//                        //ForEach(tipPercentages , id: \.self){
+//                        ForEach(0..<101){ //Added this to expand the percentage options.
+//                            Text($0, format: .percent)
+//                        }
+//                    }
+//                        //.pickerStyle(.segmented)
                     
                 } header: {
                     Text(" How much tip do you want to leave? ")
@@ -90,8 +104,7 @@ struct ContentView: View {
                     Text(" Total amount per person (tip included) ")
                 }
                 
-                
-              
+            
                 
                 
                 .navigationTitle("WeSplit")
@@ -105,19 +118,23 @@ struct ContentView: View {
                         }
                     }
                 }
-                
             }
         }
     }
 }
 
-
-
-
-
- 
-
-
+//changing text view to red if the person picks 0% text view.
+struct titleViewEdit: ViewModifier{
+    func body(content: Content) -> some View{
+        content
+            .foregroundColor(.red)
+    }
+}
+extension View{
+    func textStyle() -> some View{
+        modifier(titleViewEdit())
+    }
+}
 
 
 struct ContentView_Previews: PreviewProvider {

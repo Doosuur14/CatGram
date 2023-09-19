@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var Moves = ["Rock" , "Paper" , "Scissors"]
+    @State private var Moves = ["✊🏾"  , "🖐🏾" , "✌🏾"]
     let winningMoves = ["Paper" , "Scissors" , "Rock"]
     
     @State private var currentchoice = ""
@@ -17,7 +17,7 @@ struct ContentView: View {
     @State private var Score = ""
     @State private var scorecount = 0
     
-    @State private var randomMove = Int.random(in:0...2)
+    @State private var randomMove = Int.random(in:0..<3)
     
     @State private var showingAlert = false
     
@@ -25,98 +25,111 @@ struct ContentView: View {
         
         
         
-//        ZStack{
-//            Color.gray
-//        }
-//        
-       Spacer()
-        
-        Text("LET THE GAME BEGIN!!!")
-            .font(.largeTitle)
-            .foregroundColor(.pink)
-        
-        Spacer()
-       
-        
-        VStack(spacing:15){
-            
-            
-            Text("Your score is: \(scorecount)")
-                .font(.system(size: 30))
-           
-            
-            
-            Text(" The computer chose: " + Moves[randomMove])
-                .font(.system(size: 20))
-            
-            
-            
-        }
-        
-      
-        Spacer()
+        //        ZStack{
+        //            Color.gray
+        //        }
+        //
         
         
-        Button("Rock 🪨"){
-            
-            if  Moves[randomMove] == "Scissors"{
-                shouldWin = true
-                scorecount += 1
-                reset()
-            }else{
-                shouldWin = false
-                reset()
-            }
-        }
-        
-        Spacer()
+        //        Text("LET THE GAME BEGIN!!!")
+        //            .font(.largeTitle)
+        //            .foregroundColor(.pink)
         
         
-        Button("Scissors ✂️"){
-            if Moves[randomMove] == "Rock"{
-                shouldWin = true
-                scorecount += 1
-                reset()
-            }else{
-                shouldWin = false
-                reset()
-            }
-        }
-        
-        
-        Spacer()
-        
-        
-        Button("Paper 📃"){
-            if Moves[randomMove] == "Scissors"{
-                shouldWin = true
-                scorecount += 1
-                reset()
-//            }else if Moves[randomMove] == "Paper"{
-//                shouldWin = false
-//                reset()
-            }else{
-                shouldWin = false
-                reset()
+        NavigationView{
+            VStack{
+                
+                
+                Text("Your score is: \(scorecount)")
+                    .font(.subheadline)
+                    .font(.system(size: 30))
+                
+                
+                
+                Text(" The computer chose: ")
+                    .font(.system(size: 20))
+                    .font(.headline)
+                
+                Text("\(Moves[randomMove])")
+                    .font(.system(size: 200))
+                
+                
+                
             }
             
+            .navigationTitle("LET THE GAME BEGIN")
+            
+               
+            
+        }
+            
+            
+        HStack{
+            Button ("Rock 🪨"){
+                
+                if  Moves[randomMove] ==  "✌🏾" {
+                    shouldWin = true
+                    scorecount += 1
+                    reset()
+                }else{
+                    shouldWin = false
+                    reset()
+                }
+            }
+            
+            
+            
+            Button("Scissors ✂️"){
+                if Moves[randomMove] == " 🖐🏾 "{
+                    shouldWin = true
+                    scorecount += 1
+                    reset()
+                }else{
+                    shouldWin = false
+                    reset()
+                }
+            }
+            
+            
+          
+            
+            
+            Button("Paper 📃"){
+                if Moves[randomMove] ==  "✊🏾"{
+                    shouldWin = true
+                    scorecount += 1
+                    reset()
+                    //            }else if Moves[randomMove] == "Paper"{
+                    //                shouldWin = false
+                    //                reset()
+                }else{
+                    shouldWin = false
+                    reset()
+                }
+                
+            }
+        }
+            
+              Spacer()
+              Spacer()
+            
+            
+                        
         }
         
-      //  Spacer()
-        //Spacer()
-        
-        
-        
-        
-    }
-        
+   
     
-        func reset(){
-            randomMove = Int.random(in:0...2)
-            currentchoice = Moves[randomMove]
-            
-        }
+    
+    
+    
+    func reset(){
+        randomMove = Int.random(in:0...2)
+        currentchoice = Moves[randomMove]
+        //scorecount = 0
+        
     }
+}
+    
 
     
     
