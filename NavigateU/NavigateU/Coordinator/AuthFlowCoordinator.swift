@@ -9,13 +9,15 @@ import Foundation
 import UIKit
 
 protocol FlowCoordinatorProtocol: AnyObject {
-    func toRegisterationScreen()
+    func toRegistrationScreen()
     func toLoginScreen()
     func toHomeScreen()
+    func start(viewCon: UIViewController)
 
 }
 
 final class AuthFlowCoordinator: FlowCoordinatorProtocol {
+
 
     private let rootViewController: UINavigationController
     private let tabBarController = TabBarViewController()
@@ -24,25 +26,33 @@ final class AuthFlowCoordinator: FlowCoordinatorProtocol {
         self.rootViewController = rootViewController
     }
 
-    func toRegisterationScreen() {
-        let registrationViewController = RegistrationScreenViewController()
+
+    func start(viewCon: UIViewController) {
+        rootViewController.pushViewController(viewCon, animated: true)
+    }
+
+
+
+    func toRegistrationScreen() {
+        let registrationModel = RegistrationModel()
+        let registrationViewController = RegistrationScreenViewController(viewModel: registrationModel)
         rootViewController.pushViewController(registrationViewController, animated: true)
     }
 
     func toLoginScreen() {
-        let loginViewController = MainModuleBuider().build()
+        let loginViewController = MainModuleBuider().buildLogin()
         rootViewController.pushViewController(loginViewController, animated: true)
     }
 
     func toHomeScreen() {
-        // I added this because I was getting an error that connected scenes should be made on the main thread.
         DispatchQueue.main.async { [weak self] in
             guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
-                      let window = sceneDelegate.window else {
-                    return
-                }
-                window.rootViewController = self?.tabBarController
-                window.makeKeyAndVisible()
+                  let window = sceneDelegate.window else {
+                return
             }
+            let navigationController = UINavigationController(rootViewController: self?.tabBarController ?? HomeScreenViewController())
+            window.rootViewController = navigationController
+            window.makeKeyAndVisible()
+        }
     }
 }

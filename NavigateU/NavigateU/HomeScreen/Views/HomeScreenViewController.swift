@@ -28,15 +28,10 @@ final class HomeScreenViewController: UIViewController, HomeScreenDelegate {
         view = homeScreenView
 
     }
-//    @objc private func alreadyHaveAcct() {
-//        let viewModel = LoginViewModel()
-//        let viewController = LoginViewController(viewModel: viewModel)
-//        self.navigationController?.pushViewController(viewController, animated: true)
-//    }
 
     func pressedGetStartedButton() {
         homeScreenView?.secondView.getStartedButtonAction = { [weak self] in
-            self?.coordinator?.toRegisterationScreen()
+            self?.coordinator?.toRegistrationScreen()
         }
     }
     func pressedRegistrateredButton() {
@@ -45,4 +40,3 @@ final class HomeScreenViewController: UIViewController, HomeScreenDelegate {
         }
     }
 }
-

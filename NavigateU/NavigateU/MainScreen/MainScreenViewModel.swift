@@ -29,10 +29,17 @@ class MainScreenViewModel {
         return cell
     }
     private func setupMockData() {
-        content = [Content(photo: UIImage(named: "documents1"), title: "Documents", subTitle: "The easiet way to process your documents."),
-                   Content(photo: UIImage(named: "speaking"), title: "Speaking Clubs", subTitle: "Master russian language the fastest way possible."),
-                   Content(photo: UIImage(named: "tour"), title: "Places To Visit", subTitle: "Amazing places you have to visit in Russia."),
-                   Content(photo: UIImage(named: "jobs"), title: "Where To Find Jobs", subTitle: "The best jobs for your schedule as a student")
+        content = [Content(photo: UIImage(named: "documents1"),
+                           title: "eVisa to Moscow.",subTitle: "A biometric passport valid for 6 months Read More......."),
+                   Content(photo: UIImage(named: "headhunter"), title: "Online recruitment platform.",
+                           subTitle: "Finding jobs in Russia has been made easy Read More......"),
+                   Content(photo: UIImage(named: "redsquare"), title: "All about moscow redsquare.",
+                           subTitle: "The most popular and famous square Read More......"),
+                   Content(photo: UIImage(named: "english"), title: "The best job for native english speakers.", subTitle: "Knowing how to speak english in Russian Read More......"),
+                   Content(photo: UIImage(named:"evisa" ), title: "Extension of Registration/Student Visa.", subTitle: "Please don't forget to submit documents Read More......"),
+                   Content(photo: UIImage(named: "lake baikal"), title: "Lake Baikal.", subTitle: "The world's deepest and oldest lake Read More......"),
+                   Content(photo: UIImage(named: "modelling"), title: "Part time jobs for students.",
+                           subTitle: "Modelling is a very popular job foreign students work  Read More.......")
         ]
     }
 }

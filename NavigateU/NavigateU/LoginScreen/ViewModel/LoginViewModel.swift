@@ -14,29 +14,15 @@ final class LoginViewModel: LoginMainViewModelProtocol {
 
     @Published private(set) var state: MainViewState {
         didSet {
-            stateDidChange.send()
+            stateDidChangeForLog.send()
         }
     }
 
-  //  @Published var error: String?
-
-    private(set) var stateDidChange = ObservableObjectPublisher()
+    private(set) var stateDidChangeForLog = ObservableObjectPublisher()
 
     init () {
         self.state = .loading
     }
-
-//    func login(email: String, password: String) {
-//        UserService.shared.login(email: email, password: password) { [weak self] result in
-//            switch result {
-//            case .success:
-//                print("User successfully logged in!")
-//            case .failure:
-//                print("Login failed")
-//                self?.error = "Invalid email and password."
-//            }
-//        }
-//    }
     
     func trigger (_ intent:  MainViewIntent, email: String, password: String) {
         switch intent {
@@ -44,7 +30,7 @@ final class LoginViewModel: LoginMainViewModelProtocol {
             UserService.shared.login(email: email, password: password) { [weak self] result in
                 switch result {
                 case .success:
-                    print("User successfully logged in!")
+                    print("login successful!")
                     self?.state = .isloggedSuccessfully
                 case .failure(let error):
                     self?.state = .loginFailed
@@ -52,8 +38,6 @@ final class LoginViewModel: LoginMainViewModelProtocol {
                     loginError.handleError()
                 }
             }
-        case .didTapRegisterButton:
-            print("register tapped")
         }
     }
 }

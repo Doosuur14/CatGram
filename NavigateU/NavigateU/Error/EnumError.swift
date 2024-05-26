@@ -12,7 +12,7 @@ enum EnumError {
 
     func handleError() {
         switch self {
-        case .loginFailed(let error):
+        case .loginFailed(_):
             print("invalid email and password entered")
         }
     }

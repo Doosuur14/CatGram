@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 
-
 protocol ViewModel: ObservableObject where ObjectWillChangePublisher.Output == Void {
     associatedtype State
     associatedtype Intent
@@ -19,5 +18,6 @@ protocol ViewModel: ObservableObject where ObjectWillChangePublisher.Output == V
 }
 
 protocol UIKitViewModel: ViewModel {
-    var stateDidChange: ObservableObjectPublisher { get }
+    var stateDidChangeForLog: ObservableObjectPublisher { get }
 }
+

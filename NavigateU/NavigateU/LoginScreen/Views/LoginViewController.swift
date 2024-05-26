@@ -22,52 +22,37 @@ final class LoginViewController<ViewModel: LoginMainViewModelProtocol>: UIViewCo
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setUpView()
         coordinator = AuthFlowCoordinator(rootViewController: navigationController ?? UINavigationController())
         configureIO()
         loginDesignview?.login.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
-
+    
     private func setUpView() {
         loginDesignview = LoginView(frame: view.bounds)
         view = loginDesignview
         view.backgroundColor = .white
     }
 
-//    private func gotoHomePage() {
-//        let viewController = MainScreenViewController()
-//        self.navigationController?.pushViewController(viewController, animated: true)
-//        coordinator?.toHomeScreen()
-//    }
-    
     @objc private func loginButtonTapped() {
         guard let email = loginDesignview?.email.text, let password = loginDesignview?.password.text else {
             print("Please enter email and password")
             return
         }
         viewModel.trigger(.didTapLoginButton, email: email, password: password)
-
     }
-
+    
     private func configureIO() {
-//        viewModel.$error.sink { [weak self] error in
-//            if let error = error {
-//                print(error)
-//            } else {
-//                self?.coordinator?.toHomeScreen()
-//            }
-//        }.store(in: &cancellables)
-
-        viewModel.stateDidChange.sink { [weak self]  in
-            self?.render()
-        }
-        .store(in: &cancellables)
+        viewModel.stateDidChangeForLog.receive(on: DispatchQueue.main)
+            .sink { [weak self]  in
+                self?.render()
+            }
+            .store(in: &cancellables)
     }
-
 
     private func render() {
         switch viewModel.state {
@@ -75,8 +60,8 @@ final class LoginViewController<ViewModel: LoginMainViewModelProtocol>: UIViewCo
             print("loading state")
         case .isloggedSuccessfully:
             coordinator?.toHomeScreen()
-            print("content state")
         case .loginFailed:
+            AlertManager.shared.showLoginErrorAlert(viewCon: self)
             break
         }
     }
